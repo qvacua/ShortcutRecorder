@@ -117,6 +117,7 @@ typedef NS_ENUM(NSUInteger, _SRRecorderControlButtonTag)
     _enabled = YES;
     _allowedModifierFlags = SRCocoaModifierFlagsMask;
     _requiredModifierFlags = 0;
+    _storesEmptyValueForNoShortcut = NO;
     _mouseTrackingButtonTag = _SRRecorderControlInvalidButtonTag;
     _snapBackButtonToolTipTag = NSIntegerMax;
 
@@ -202,6 +203,10 @@ typedef NS_ENUM(NSUInteger, _SRRecorderControlButtonTag)
     // to handle NSNull here and convert it into nil.
     if ((NSNull *)newObjectValue == [NSNull null])
         newObjectValue = nil;
+
+    if (newObjectValue == nil && self.storesEmptyValueForNoShortcut) {
+        newObjectValue = @{};
+    }
 
     _objectValue = [newObjectValue copy];
     [self propagateValue:_objectValue forBinding:NSValueBinding];
