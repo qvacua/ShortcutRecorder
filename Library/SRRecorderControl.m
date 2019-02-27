@@ -110,6 +110,7 @@ typedef NS_ENUM(NSUInteger, _SRRecorderControlButtonTag)
     _enabled = YES;
     _allowedModifierFlags = SRCocoaModifierFlagsMask;
     _requiredModifierFlags = 0;
+    _storesEmptyValueForNoShortcut = NO;
     _mouseTrackingButtonTag = _SRRecorderControlInvalidButtonTag;
     _snapBackButtonToolTipTag = NSIntegerMax;
 
@@ -218,6 +219,10 @@ typedef NS_ENUM(NSUInteger, _SRRecorderControlButtonTag)
         NSLog(@"WARNING: Shortcut Recroder 2 compatibility mode enabled. Getters of objectValue and NSValueBinding will return an instance of NSDictionary.");
         _isCompatibilityModeEnabled = YES;
         newObjectValue = [SRShortcut shortcutWithDictionary:(NSDictionary *)newObjectValue];
+    }
+
+    if (newObjectValue == nil && self.storesEmptyValueForNoShortcut) {
+        newObjectValue = @{};
     }
 
     _objectValue = [newObjectValue copy];
