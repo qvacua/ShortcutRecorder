@@ -136,6 +136,13 @@ IB_DESIGNABLE
 @property (nonatomic, getter=isEnabled) IBInspectable BOOL enabled;
 
 /*!
+    Determines whether we store an empty dictionary for deleted shortcuts.
+
+    @discussion Defaults to NO.
+ */
+@property IBInspectable BOOL storesEmptyValueForNoShortcut;
+
+/*!
     Determines whether recording is in process.
  */
 @property (nonatomic, readonly) BOOL isRecording;
