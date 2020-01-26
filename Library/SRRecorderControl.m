@@ -75,6 +75,7 @@ static NSInteger _SRStyleAppearanceObservingContext;
     _allowsDeleteToClearShortcutAndEndRecording = YES;
     _allowedModifierFlags = SRCocoaModifierFlagsMask;
     _requiredModifierFlags = 0;
+    _storesEmptyValueForNoShortcut = NO;
     _mouseTrackingButtonTag = _SRRecorderControlInvalidButtonTag;
     _cancelButtonToolTipTag = NSIntegerMax;
     _clearButtonToolTipTag = NSIntegerMax;
@@ -211,6 +212,10 @@ static NSInteger _SRStyleAppearanceObservingContext;
         NSLog(@"WARNING: Shortcut Recroder 2 compatibility mode enabled. Getters of objectValue and NSValueBinding will return an instance of NSDictionary.");
         _isCompatibilityModeEnabled = YES;
         newObjectValue = [SRShortcut shortcutWithDictionary:(NSDictionary *)newObjectValue];
+    }
+
+    if (newObjectValue == nil && self.storesEmptyValueForNoShortcut) {
+        newObjectValue = @{};
     }
 
     _objectValue = [newObjectValue copy];

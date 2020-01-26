@@ -118,6 +118,13 @@ IB_DESIGNABLE
 @property IBInspectable BOOL pausesGlobalShortcutMonitorWhileRecording;
 
 /*!
+ whether we store an empty dictionary for deleted shortcuts.
+
+ discussion Defaults to NO.
+ */
+@property IBInspectable BOOL storesEmptyValueForNoShortcut;
+
+/*!
  Whether the string value respects the user interface layout direction.
 
  @discussion
